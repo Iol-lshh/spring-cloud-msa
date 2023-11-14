@@ -1,0 +1,41 @@
+server:
+    port: 9090
+
+spring:
+    datasource:
+        driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+        url: jdbc:sqlserver://192.168.150.21:1433;databaseName=ISHERPA_2010;encrypt=false;sendStringParametersAsUnicode=false;
+        username: kws02
+        password: crazydog1#
+    jpa:
+        hibernate:
+            ddl-auto: none
+            naming:
+                physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        properties:
+            hibernate:
+                show_sql: true
+                format_sql: true
+                use_sql_comments: true
+
+customize-function:
+    fileio:
+        path: 'src/main/resources/static/UploadFile'
+
+jwt:
+  access: 
+    secret: dGhpcy1pcy1hLXNhbXBsZS1tYWRlLWJ5LWxzaGgtand0LXRlc3Qtc2VjcmV0LWtleS10aGlzLWlzLWEtc2FtcGxlLW1hZGUtYnktbHNoaC1qd3QtdGVzdC1zZWNyZXQta2V5
+    token-validity-in-days: 1
+  refresh: 
+    secret: dGhpcy1pcy1hLXNhbXBsZS1tYWRlLWJ5LWxzaGgtand0LXRlc3Qtc2VjcmV0LWtleS10aGlzLWlzLWEtc2FtcGxlLW1hZGUtYnktbHNoaC1qd3QtdGVzdC1zZWNyZXQta2V5
+    token-validity-in-days: 30
+
+security:
+  filter-config:
+    initial-authentication-filter:
+      path: /login/in
+    refresh-logout-filter:
+      path: /login/out
+    refresh-request:
+      path: /login/refresh
+    ignore-list: /login/test, /login/up

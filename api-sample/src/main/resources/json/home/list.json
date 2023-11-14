@@ -1,0 +1,27 @@
+{
+    "mainQuery" : ["
+        SELECT 
+            COUNT(*) AS CNT
+        FROM TBL_LCMS_Notice
+        WHERE 1=1
+        AND DeleteYN != 'Y'
+        {where1}
+        {where2}
+    ","
+        SELECT * FROM (
+            SELECT 
+                *,
+                ROW_NUMBER() OVER(ORDER BY IDX DESC) AS ROW
+            FROM TBL_LCMS_Notice 
+            WHERE 1=1
+            AND DeleteYN != 'Y'
+            {where1}
+            {where2}
+        ) A
+        WHERE A.ROW BETWEEN ((@in_PageNo-1) * @in_ListSize) + 1 AND @in_PageNo * @in_ListSize 
+    "],
+    "brickQuery" : [
+        {"key": "where1", "condition": "@in_Key.equals('SUB') && !@in_Val.isEmpty()", "query": "AND TITLE LIKE '%' + @in_Val + '%'"},
+        {"key": "where2", "condition": "@in_Key.equals('USR') && !@in_Val.isEmpty()", "query": "AND USERID LIKE '%' + @in_Val + '%'"}
+    ]
+}

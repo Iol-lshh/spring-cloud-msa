@@ -1,0 +1,10 @@
+spring:
+  application:
+    name: api-gateway
+
+spring:
+  cloud:
+    gateway:
+      discovery.locator:
+        enabled: true
+        lowerCaseServiceId: true

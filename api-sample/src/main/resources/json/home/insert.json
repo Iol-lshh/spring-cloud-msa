@@ -1,0 +1,3 @@
+{
+    "mainQuery" : ["INSERT INTO TBL_LCMS_Notice(UserId, Title, Content, Lecturer_Code, DeleteYN, RegDate, InputDate) VALUES (@in_UserID, @in_Title, @in_Content, '', 'N', getdate(), CONVERT(VARCHAR(10), GETDATE(),121))"]
+}
